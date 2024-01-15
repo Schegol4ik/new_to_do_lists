@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
+import {choiceFilterType} from "./App";
 
 type TaskType = {
-    id: number,
+    id: string,
     title: string,
     isDone: boolean
 }
@@ -15,13 +16,11 @@ type PropsType = {
     }[]*/           // Можно сделать так
     tasks: Array<TaskType>
     addTask: () => void
-    removeTask: (id: number) => void
+    removeTask: (id: string) => void
     inpNewTask: string
     setInpNewTask: (value: string) => void
-    isCheck: (id: number) => void
-    isActivTasks: () => void
-    isAllTasks: () => void
-    isCompleted: () => void
+    isCheck: (id: string) => void
+    choiseFilter: (title: choiceFilterType) => void
 }
 export const Todolist = ({
                              title,
@@ -31,10 +30,14 @@ export const Todolist = ({
                              setInpNewTask,
                              inpNewTask,
                              isCheck,
-                             isActivTasks,
-                             isAllTasks,
-                             isCompleted
+                             choiseFilter
                          }: PropsType) => {
+
+    const onKeyPressAddTask = (e:  React.KeyboardEvent<HTMLInputElement>) => {
+        if(e.charCode === 13){
+            addTask()
+        }
+    }
 
 
     return (
@@ -43,7 +46,10 @@ export const Todolist = ({
             <div>
                 <input type="text"
                        value={inpNewTask}
-                       onChange={(e) => setInpNewTask(e.target.value)}/>
+                       onChange={(e) => setInpNewTask(e.target.value)}
+                       onKeyPress={(e) => onKeyPressAddTask(e)}
+
+                />
                 <button onClick={addTask}>+</button>
             </div>
             <ul>
@@ -53,9 +59,9 @@ export const Todolist = ({
                 </li>)}
             </ul>
             <div>
-                <button onClick={isAllTasks}>All</button>
-                <button onClick={isActivTasks}>Active</button>
-                <button onClick={isCompleted}>Completed</button>
+                <button onClick={() => choiseFilter('all')}>All</button>
+                <button onClick={() => choiseFilter('active')}>Active</button>
+                <button onClick={() => choiseFilter('completed')}>Completed</button>
             </div>
         </div>
     )
