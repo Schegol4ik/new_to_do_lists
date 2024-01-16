@@ -6,3 +6,28 @@
 .App > div {
   margin-right: 50px;
 }
+
+.error {
+  color: red;
+}
+
+.error_input{
+  border: 2px solid red;
+  outline-color: red;
+}
+
+.button_category {
+  border: 1px solid blue;
+}
+
+button {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.is_done {
+  opacity: 0.5;
+}

@@ -16,7 +16,7 @@ const App = () => {
     ])
     const [inpNewTask, setInpNewTask] = useState<string>('')
     const [filter, setFilter] = useState<choiceFilterType>('all')
-
+    const [error, setError] = useState<null | string>(null)
     const removeTask = (idTask: string) => {
         setTasks(() => tasks.filter(({id}) => id !== idTask))
     }
@@ -30,7 +30,7 @@ const App = () => {
                     title: inpNewTask
                 }, ...tasks])
             setInpNewTask('')
-        }
+        }else setError('Title is required')
     } // Добавление таски
 
     const isCheck = (idTask: string) => {
@@ -71,7 +71,7 @@ const App = () => {
         <div className="App">
             <Todolist title='What is learn?' tasks={choiseFilterTask} addTask={addTask} inpNewTask={inpNewTask}
                       removeTask={removeTask} setInpNewTask={setInpNewTask} isCheck={isCheck}
-                      choiseFilter={choiseFilter}
+                      choiseFilter={choiseFilter} error={error} setError={setError} filter={filter}
             />
         </div>
     );
